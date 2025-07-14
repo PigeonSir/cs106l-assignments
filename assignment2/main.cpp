@@ -13,8 +13,9 @@
 #include <set>
 #include <string>
 #include <unordered_set>
+#include <sstream>
 
-std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
+std::string kYourName = "Luka Ciou"; // Don't forget to change this!
 
 /**
  * Takes in a file name and returns a set containing all of the applicant names as a set.
@@ -28,9 +29,22 @@ std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
  * to also change the corresponding functions in `utils.h`.
  */
 std::set<std::string> get_applicants(std::string filename) {
-  // STUDENT TODO: Implement this function.
+  std::set<std::string> ret;
+  std::ifstream ifs(filename);
+  std::string temp;
+  while(std::getline(ifs, temp)) {
+    ret.insert(temp);
+  }
+  return ret;
 }
-
+bool matching(const std::string &a, const std::string &b) {
+  std::istringstream aa(a), bb(b);
+  std::string a_first, a_last;
+  std::string b_first, b_last;
+  aa >> a_first >> a_last;
+  bb >> b_first >> b_last;
+  return a_first[0] == b_first[0] && a_last[0] == b_last[0];
+}
 /**
  * Takes in a set of student names by reference and returns a queue of names
  * that match the given student name.
@@ -40,7 +54,12 @@ std::set<std::string> get_applicants(std::string filename) {
  * @return          A queue containing pointers to each matching name.
  */
 std::queue<const std::string*> find_matches(std::string name, std::set<std::string>& students) {
-  // STUDENT TODO: Implement this function.
+  std::queue<const std::string*> q;
+  for (auto it = students.begin(); it != students.end(); ++it) {
+    if (matching(name, *it))
+      q.push(&(*it));
+  }
+  return q;
 }
 
 /**
@@ -54,7 +73,9 @@ std::queue<const std::string*> find_matches(std::string name, std::set<std::stri
  *                Will return "NO MATCHES FOUND." if `matches` is empty.
  */
 std::string get_match(std::queue<const std::string*>& matches) {
-  // STUDENT TODO: Implement this function.
+  std::string ret = *matches.front();
+  matches.pop();
+  return ret;
 }
 
 /* #### Please don't remove this line! #### */

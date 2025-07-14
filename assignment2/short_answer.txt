@@ -5,7 +5,11 @@ Marriage Pact
 -------------
 
 Q1. It is your choice to use either an ordered or unordered set. In a few sentences, what are some of the tradeoffs between the two? Additionally, please give an example (that has not been shown in lecture) of a valid hash function that could be used to hash student names for an unordered set.
-A1. TODO
-
+A1.
+I used `unordered_set` because it provides faster average-case lookup time (O(1)) compared to `set`, which has O(log n) complexity due to its tree-based structure. The tradeoff is that `unordered_set` typically consumes more memory and does not maintain any order, whereas `set` keeps elements sorted and may use less memory overall.
+An example of a valid hash function for student names could be:
+std::hash<std::string>()(name.substr(0, 3));
 Q2. Note that we are saving pointers to names in the queue, not names themselves. Why might this be desired in this problem? What happens if the original set where the names are stored goes out of scope and the pointers are referenced?
-A2. TODO
+A2.
+Saving pointers to names instead of copying the strings can reduce memory usage and improve performance, especially when names are long or repeated. It also allows direct access to the original data for updates.
+However, if the original set that stores the names goes out of scope, those pointers will become dangling. Accessing them afterward results in undefined behavior, which often leads to segmentation faults.
