@@ -13,6 +13,7 @@
 #include <sstream>
 #include <string>
 
+#include "class.h"
 #include "sandbox.cpp"
 
 int run_autograder() {
