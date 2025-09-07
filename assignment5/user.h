@@ -19,7 +19,8 @@ public:
    * STUDENT TODO:
    * Your custom operators and special member functions will go here!
    */
-
+  friend std::ostream& operator<<(std::ostream& os, const User& user);
+  ~User();
 private:
   std::string _name;
   std::string* _friends;
