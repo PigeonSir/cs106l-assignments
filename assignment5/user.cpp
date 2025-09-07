@@ -77,3 +77,25 @@ std::ostream& operator<<(std::ostream& os, const User& user) {
 User::~User(void){
   delete [] _friends;
 }
+
+User::User(const User& other) {
+  _name = other._name;
+  _size = other._size;
+  _capacity = other._capacity;
+  _friends = new std::string[_capacity];
+  for (int i = 0; i < _size; i++)
+    _friends[i] = other._friends[i];
+}
+
+User& User::operator=(const User& other) {
+  if (this == &other)
+    return *this;
+  delete [] this->_friends;
+  this->_name = other._name;
+  this->_size = other._size;
+  this->_capacity = other._capacity;
+  this->_friends = new std::string[this->_capacity];
+  for (int i = 0; i < _size; i++)
+    this->_friends[i] = other._friends[i];
+  return *this;
+}
