@@ -99,3 +99,13 @@ User& User::operator=(const User& other) {
     this->_friends[i] = other._friends[i];
   return *this;
 }
+
+User& User::operator+=(User &other) {
+  this->add_friend(other._name);
+  other.add_friend(this->_name);
+  return *this;
+}
+
+bool User::operator<(const User &other) const {
+  return this->_name.compare(other._name) < 0;
+}
